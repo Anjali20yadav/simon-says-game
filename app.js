@@ -106,7 +106,7 @@ function updateMaxLevel(currentLevel) {
     }
 }
 
-// Example usage: call updateMaxLevel(level) whenever the game ends
+
 
 
 
