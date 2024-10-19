@@ -1,7 +1,6 @@
 let gameseq=[];
 let userseq=[];
 let bod=document.querySelector("body");
-
 let btns=["yellow","red","purple","green"];
 
 let level=0;
@@ -9,12 +8,14 @@ let started=false;
 
 let h2=document.querySelector("h2");
 
+
+
+
 document.addEventListener("keypress",function(){
     if(started==false){
     console.log("game started");
     started=true;
-    levelup();
-   
+    levelup();  
     }
 });
 
@@ -25,25 +26,12 @@ function gameflash(btn){
     },300);
  }
 
-
-
  function lost(){
     bod.classList.add("out");
     setTimeout(function(){
      bod.classList.remove("out");
     },300);
  }
-
-
-
-
-
-
-
-
-
-
-
 
  function userflash(btn){
     btn.classList.add("userflash");
@@ -62,22 +50,19 @@ let randcolor=btns[randidx];
 let randbtn=document.querySelector(`.${randcolor}`)
   gameseq.push(randcolor);
   console.log(gameseq);
-   gameflash(randbtn);
-   
+   gameflash(randbtn);  
 }
 
 function checkans(idx){
-    console.log("curr level:",level);
-
-   
+    console.log("curr level:",level)
     if (userseq[idx]===gameseq[idx]){
         console.log("same value");
         if(userseq.length==gameseq.length){
             setTimeout(levelup,1000);
         }
     }else{
-
         h2.innerHTML=`Game over! your score was <b> ${level}</b><br> press any key to start.`;
+        updateMaxLevel(level);
        reset();
        lost();
     }
@@ -104,4 +89,24 @@ function reset(){
     userseq=[];
     level=0;
 }
+// Get the maximum level from localStorage (or set it to 0 if it doesn't exist)
+let maxLevel = localStorage.getItem('maxLevel') || 0;
+
+// Create and display a paragraph to show the maximum level on the screen
+let maxLevelParagraph = document.createElement("p");
+maxLevelParagraph.textContent = `Max Level: ${maxLevel}`;
+document.body.appendChild(maxLevelParagraph);
+
+// Function to update the maximum level
+function updateMaxLevel(currentLevel) {
+    if (currentLevel > maxLevel) {
+        maxLevel = currentLevel;
+        localStorage.setItem('maxLevel', maxLevel);
+        maxLevelParagraph.textContent = `Max Level: ${maxLevel}`;
+    }
+}
+
+// Example usage: call updateMaxLevel(level) whenever the game ends
+
+
 
