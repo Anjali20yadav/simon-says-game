@@ -89,15 +89,15 @@ function reset(){
     userseq=[];
     level=0;
 }
-// Get the maximum level from localStorage (or set it to 0 if it doesn't exist)
+
 let maxLevel = localStorage.getItem('maxLevel') || 0;
 
-// Create and display a paragraph to show the maximum level on the screen
+
 let maxLevelParagraph = document.createElement("p");
 maxLevelParagraph.textContent = `Max Level: ${maxLevel}`;
 document.body.appendChild(maxLevelParagraph);
 
-// Function to update the maximum level
+
 function updateMaxLevel(currentLevel) {
     if (currentLevel > maxLevel) {
         maxLevel = currentLevel;
